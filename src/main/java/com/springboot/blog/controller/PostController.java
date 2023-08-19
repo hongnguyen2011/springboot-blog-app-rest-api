@@ -1,6 +1,5 @@
 package com.springboot.blog.controller;
 
-import com.springboot.blog.entity.Post;
 import com.springboot.blog.payload.PostDto;
 import com.springboot.blog.payload.PostResponse;
 import com.springboot.blog.service.PostService;
@@ -65,5 +64,12 @@ public class PostController {
         postService.deletePostById(id);
 
         return new ResponseEntity<>("Post entity deleted successfully.", HttpStatus.OK);
+    }
+
+    //build get Posts by Category REST API
+    @GetMapping("/category/{id}")
+    public ResponseEntity<List<PostDto>> getPostsByCategory(@PathVariable("id") Long categoryId) {
+        List<PostDto> postDtos = postService.getPostsByCategory(categoryId);
+        return ResponseEntity.ok(postDtos);
     }
 }
